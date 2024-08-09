@@ -76,7 +76,7 @@ class Client:
     def set_token(self, token: Optional[str] = None) -> None:
         """
         Authenticates the client with the passed .ROBLOSECURITY token.
-        This method does not send any requests and will not throw if the token is invalid.
+        This method does not send any requests and will not throw an exception if the token is invalid.
 
         Arguments:
             token: A .ROBLOSECURITY token to authenticate the client with.
@@ -93,7 +93,7 @@ class Client:
             user_id: A Roblox user ID.
 
         Returns:
-            A user object.
+            A [User][roblox.users.User].
         """
         try:
             user_response = await self._requests.get(
@@ -114,10 +114,10 @@ class Client:
         Grabs the authenticated user.
 
         Arguments:
-            expand: Whether to return a User (2 requests) rather than a PartialUser (1 request)
+            expand: Whether to return a [User][roblox.users.User] (2 requests) rather than a [PartialUser][roblox.partials.partialuser.PartialUser] (1 request)
 
         Returns:
-            The authenticated user.
+            A [User][roblox.users.User] representing the authenticated user.
         """
         authenticated_user_response = await self._requests.get(
             url=self._url_generator.get_url("users", f"v1/users/authenticated")
@@ -141,10 +141,10 @@ class Client:
         Arguments:
             user_ids: A list of Roblox user IDs.
             exclude_banned_users: Whether to exclude banned users from the data.
-            expand: Whether to return a list of Users (2 requests) rather than PartialUsers (1 request)
+            expand: Whether to return a list of [User][roblox.users.User] objects (2 requests) rather than [PartialUser][roblox.partials.partialuser.PartialUser] (1 request)
 
         Returns:
-            A List of Users or partial users.
+            A list of [User][roblox.users.User] or [PartialUser][roblox.partials.partialuser.PartialUser] objects, depending on the expand argument.
         """
         users_response = await self._requests.post(
             url=self._url_generator.get_url("users", f"v1/users"),
@@ -172,10 +172,10 @@ class Client:
         Arguments:
             usernames: A list of Roblox usernames.
             exclude_banned_users: Whether to exclude banned users from the data.
-            expand: Whether to return a list of Users (2 requests) rather than RequestedUsernamePartialUsers (1 request)
+            expand: Whether to return a list of Users (2 requests) rather than [RequestedUsernamePartialUser][roblox.partials.partialuser.RequestedUsernamePartialUser] (1 request)
 
         Returns:
-            A list of User or RequestedUsernamePartialUser, depending on the expand argument.
+            A list of [User][roblox.users.User] or [RequestedUsernamePartialUser][roblox.partials.partialuser.RequestedUsernamePartialUser] objects, depending on the expand argument.
         """
         users_response = await self._requests.post(
             url=self._url_generator.get_url("users", f"v1/usernames/users"),
@@ -200,10 +200,10 @@ class Client:
         Arguments:
             username: A Roblox username.
             exclude_banned_users: Whether to exclude banned users from the data.
-            expand: Whether to return a User (2 requests) rather than a RequestedUsernamePartialUser (1 request)
+            expand: Whether to return a [User][roblox.users.User] (2 requests) rather than a [RequestedUsernamePartialUser][roblox.partials.partialuser.RequestedUsernamePartialUser] (1 request)
 
         Returns:
-            A User or RequestedUsernamePartialUser depending on the expand argument.
+            A [User][roblox.users.User] or [RequestedUsernamePartialUser][roblox.partials.partialuser.RequestedUsernamePartialUser] depending on the expand argument.
         """
         users = await self.get_users_by_usernames(
             usernames=[username],
@@ -227,7 +227,7 @@ class Client:
             user_id: A Roblox user ID.
 
         Returns:
-            A BaseUser.
+            A [BaseUser][roblox.bases.baseuser.BaseUser].
         """
         return BaseUser(client=self, user_id=user_id)
 
@@ -242,7 +242,7 @@ class Client:
             max_items: The maximum items to return when looping through this object.
 
         Returns:
-            A PageIterator containing RequestedUsernamePartialUser.
+            A PageIterator containing [PreviousUsernamesPartialUser][roblox.partials.partialuser.PreviousUsernamesPartialUser].
         """
         return PageIterator(
             client=self,
@@ -262,7 +262,7 @@ class Client:
             group_id: A Roblox group ID.
 
         Returns:
-            A Group.
+            A [Group][roblox.groups.Group].
         """
         try:
             group_response = await self._requests.get(
@@ -288,7 +288,7 @@ class Client:
             group_id: A Roblox group ID.
 
         Returns:
-            A BaseGroup.
+            A [BaseGroup][roblox.bases.basegroup.BaseGroup].
         """
         return BaseGroup(client=self, group_id=group_id)
 
@@ -301,7 +301,7 @@ class Client:
             universe_ids: A list of Roblox universe IDs.
 
         Returns:
-            A list of Universes.
+            A list of [Universe][roblox.universes.Universe] objects.
         """
         universes_response = await self._requests.get(
             url=self._url_generator.get_url("games", "v1/games"),
@@ -321,7 +321,7 @@ class Client:
             universe_id: A Roblox universe ID.
 
         Returns:
-            A Universe.
+            A [Universe][roblox.universes.Universe].
         """
         universes = await self.get_universes(universe_ids=[universe_id])
         try:
@@ -341,7 +341,7 @@ class Client:
             universe_id: A Roblox universe ID.
 
         Returns:
-            A BaseUniverse.
+            A [BaseUniverse][roblox.bases.baseuniverse.BaseUniverse].
         """
         return BaseUniverse(client=self, universe_id=universe_id)
 
@@ -354,7 +354,7 @@ class Client:
             place_ids: A list of Roblox place IDs.
 
         Returns:
-            A list of Places.
+            A list of [Place][roblox.places.Place] objects.
         """
         places_response = await self._requests.get(
             url=self._url_generator.get_url(
@@ -375,7 +375,7 @@ class Client:
             place_id: A Roblox place ID.
 
         Returns:
-            A Place.
+            A [Place][roblox.places.Place].
         """
         places = await self.get_places(place_ids=[place_id])
         try:
@@ -395,7 +395,7 @@ class Client:
             place_id: A Roblox place ID.
 
         Returns:
-            A BasePlace.
+            A [BasePlace][roblox.bases.baseplace.BasePlace].
         """
         return BasePlace(client=self, place_id=place_id)
 
@@ -408,7 +408,7 @@ class Client:
             asset_id: A Roblox asset ID.
 
         Returns:
-            An Asset.
+            An [EconomyAsset][roblox.assets.EconomyAsset].
         """
         try:
             asset_response = await self._requests.get(
@@ -436,7 +436,7 @@ class Client:
             asset_id: A Roblox asset ID.
 
         Returns:
-            A BaseAsset.
+            A [BaseAsset][roblox.bases.baseasset.BaseAsset].
         """
         return BaseAsset(client=self, asset_id=asset_id)
 
@@ -449,7 +449,7 @@ class Client:
             plugin_ids: A list of Roblox plugin IDs.
 
         Returns:
-            A list of Plugins.
+            A list of [Plugin][roblox.plugins.Plugin] objects.
         """
         plugins_response = await self._requests.get(
             url=self._url_generator.get_url(
@@ -470,7 +470,7 @@ class Client:
             plugin_id: A Roblox plugin ID.
 
         Returns:
-            A Plugin.
+            A [Plugin][roblox.plugins.Plugin].
         """
         plugins = await self.get_plugins([plugin_id])
         try:
@@ -490,7 +490,7 @@ class Client:
             plugin_id: A Roblox plugin ID.
 
         Returns:
-            A BasePlugin.
+            A [BasePlugin][roblox.bases.baseplugin.BasePlugin].
         """
         return BasePlugin(client=self, plugin_id=plugin_id)
 
@@ -503,7 +503,7 @@ class Client:
             badge_id: A Roblox badge ID.
 
         Returns:
-            A Badge.
+            A [Badge][roblox.badges.Badge].
         """
         try:
             badge_response = await self._requests.get(
@@ -531,7 +531,7 @@ class Client:
             badge_id: A Roblox badge ID.
 
         Returns:
-            A BaseBadge.
+            A [BaseBadge][roblox.bases.basebadge.BaseBadge].
         """
         return BaseBadge(client=self, badge_id=badge_id)
 
@@ -547,6 +547,6 @@ class Client:
         Arguments:
             gamepass_id: A Roblox gamepass ID.
 
-        Returns: A BaseGamePass.
+        Returns: A [BaseGamePass][roblox.bases.basegamepass.BaseGamePass].
         """
         return BaseGamePass(client=self, gamepass_id=gamepass_id)
