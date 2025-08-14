@@ -1,4 +1,14 @@
-<img align="left" src="./gh-assets/logo-wordmark.svg" alt="ro.py" height="96" /><a href="https://ro.py.jmk.gg"><img align="right" src="./gh-assets/docs-button.svg" alt="Docs"></a><a href="https://discord.gg/hHjwxZxhR2"><img align="right" src="./gh-assets/discord-button.svg" alt="Discord"></a><img src="./gh-assets/clearfloat.svg">
+<img align="left" src="./gh-assets/logo-wordmark.svg" alt="The offical ro.py logo." width="40%" />
+
+<a href="https://ro.py.jmk.gg">
+  <img align="right" src="./gh-assets/docs-button.svg" alt="Access the project documentation.">
+</a>
+
+<a href="https://discord.gg/hHjwxZxhR2">
+  <img align="right" src="./gh-assets/discord-button.svg" alt="Join the official ro.py Discord server.">
+</a>
+
+<img src="./gh-assets/clearfloat.svg">
 
 ## Overview
 ro.py is an asynchronous, object-oriented wrapper for the Roblox web API.
